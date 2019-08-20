@@ -8,7 +8,7 @@ Noughts and Crosses - The ASP.NET and React Challenge
 
 #### Requirements
 - .NET Core 2.2 SDK (I followed the instructions provided from [Microsoft](https://dotnet.microsoft.com/download))
-- Node (I used version 10.15.0 [Node.js]((https://nodejs.org/en/download/)))
+- Node (I used version 10.15.0 [Node.js](https://nodejs.org/en/download/))
 
 ### Getting Started
 1 - Clone this repo to your local machine: https://github.com/grace000/donuts-and-coffees.git
