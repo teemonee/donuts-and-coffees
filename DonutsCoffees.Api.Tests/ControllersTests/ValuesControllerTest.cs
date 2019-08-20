@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 
-namespace DonutsCoffees.Api.ControllersTests
+namespace DonutsCoffees.Api.Tests.ControllersTests
 {
     [TestFixture]
     public class Tests
@@ -9,7 +9,6 @@ namespace DonutsCoffees.Api.ControllersTests
         [Test]
         public void Test1()
         {
-            
             Assert.That(1 == 1);
         }
     }
