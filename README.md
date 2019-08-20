@@ -1,4 +1,4 @@
-# Donuts and Coffees  🍩 ☕️ [![Build Status](https://travis-ci.com/grace000/donuts-and-coffees.svg?branch=master)](https://github.com/grace000/donuts-and-coffees)
+# Donuts and Coffees  🍩 ☕️ [![Build Status](https://travis-ci.com/grace000/donuts-and-coffees.svg?token=KfDkRwssbgwSJEE6UxxP&branch=master)](https://github.com/grace000/donuts-and-coffees)
 
 Noughts and Crosses - The ASP.NET and React Challenge 
 
