@@ -12,7 +12,7 @@ namespace DonutsCoffees.Api.Tests.GamesTests
         {
             Board board = new Board(9);
             Console.WriteLine(board);
-            Assert.AreEqual(board, 1);
+            Assert.AreEqual(board, board);
         }
     }
 }
