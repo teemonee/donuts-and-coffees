@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.6">
+    <AllowExplicitVersion>true</AllowExplicitVersion> 
       <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
       <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
     </PackageReference>
@@ -26,9 +27,6 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DonutsCoffees.Api.Tests\DonutsCoffees.Api.Tests.csproj" />
-  </ItemGroup>
   <ItemGroup>
     <Folder Include="Games\" />
     <Folder Include="Games\Definitions\" />
