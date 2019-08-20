@@ -1,11 +1,11 @@
+using System;
 using NUnit.Framework;
 
-namespace ValuesControllerTests
+namespace DonutsCoffees.Api.ControllersTests
 {
     [TestFixture]
     public class Tests
     {
-
         [Test]
         public void Test1()
         {
