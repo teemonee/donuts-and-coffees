@@ -57,7 +57,7 @@ namespace DonutsCoffees.Api
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action=Root}/{id?}");
+                    template: "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>

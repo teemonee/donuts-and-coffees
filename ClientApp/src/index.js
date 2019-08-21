@@ -9,7 +9,7 @@ const App = {
         const rootElement = document.getElementById('root');
         ReactDOM.render(<Root />, rootElement)
     }
-}
+};
 
 App.run();
 serviceWorker.unregister();
