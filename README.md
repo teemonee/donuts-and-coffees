@@ -13,7 +13,7 @@ Noughts and Crosses - The ASP.NET and React Challenge
 ### Getting Started
 1 - Clone this repo to your local machine: https://github.com/grace000/donuts-and-coffees.git
 ```
-$ git clone https://github.com/grace000/donuts-and-coffees.git
+$ git clone https://github.com/teemonee/donuts-and-coffees.git
 
 ```
 2 - Navigate to the cloned project's root folder and run the following command:
@@ -30,7 +30,7 @@ $ ctrl + c
  
 ### Using It
  
-In your browser, navigate to https://localhost:5008 for the main page 
+In your browser, navigate to https://localhost:5000 for the main page 
  
  
 ### Running Tests
