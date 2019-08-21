@@ -5,9 +5,11 @@ namespace DonutsCoffees.Api.Games
 {
     public class Board
     {
-        public List<int> EmptyBoard()
+        public List<int> Spaces;
+
+        public Board()
         {
-            return new List<int>();
+            Spaces = new List<int>();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace DonutsCoffees.Api.Tests.GamesTests
             
             Board board = new Board();
             var expectedList = new List<int>();
-            Assert.AreEqual(expectedList, board.EmptyBoard());
+            Assert.AreEqual(expectedList,board.Spaces);
         }
     }
 }
