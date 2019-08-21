@@ -7,8 +7,8 @@ export class Home extends Component {
 
     render () {
         return (
-            <div>
-                <h1>Welcome to Donuts and Coffees</h1>
+            <div style={{textAlign:"center"}}>
+                <h1>Donuts and Coffees</h1>
                 <Grid container justify="center">
                     <Board />
                 </Grid>
