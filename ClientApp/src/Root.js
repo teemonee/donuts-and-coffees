@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
-import { Home } from './components/Home';
+import { Home } from './views/Home';
 import { Values } from './components/Values';
 import { Layout } from './components/Layout';
 
