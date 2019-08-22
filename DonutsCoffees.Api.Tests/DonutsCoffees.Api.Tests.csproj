@@ -15,6 +15,6 @@
     <ProjectReference Include="..\DonutsCoffees.Api\DonutsCoffees.Api.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GamesTests\" />
+    <Folder Include="GameServicesTests\" />
   </ItemGroup>
 </Project>
