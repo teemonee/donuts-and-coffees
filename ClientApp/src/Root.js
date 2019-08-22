@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
-import { Home } from './views/Home';
+import Home from './views/Home';
 import { Layout } from './components/Layout';
 
-class Root extends Component {
+export default class Root extends Component {
   render () {
     return (
       <BrowserRouter>
@@ -16,4 +16,3 @@ class Root extends Component {
   }
 }
 
-export default Root;
