@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const data = {
+const helpers = {
     startNewGame(){
         return axios.get('/api/GetNewGameSession').then(response => {
             return response.data
@@ -8,4 +8,4 @@ const data = {
     }
 };
 
-export default data;
+export default helpers;
