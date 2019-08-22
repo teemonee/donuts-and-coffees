@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const helpers = {
     startNewGame(){
-        return axios.get('/api/GetNewGameSession').then(response => {
-            return response.data
+        return axios.get('/api/Game/GetNewGameSession').then(response => {
+            return response.data[0];
         })
     }
 };
