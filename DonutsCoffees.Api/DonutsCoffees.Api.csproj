@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Games\" />
+    <Folder Include="GameServices\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Games\Definitions\IPlayer.cs" />

@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DonutsCoffees.Api.Games;
+using System.Data.Common;
 using DonutsCoffees.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,20 +9,13 @@ namespace DonutsCoffees.Api.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        private List<GameSession> gameSession;
-        
-        public GameController() { }
+        private List<GameSession> _gameSession;
 
-        public GameController(List<GameSession> gameSession)
-        {
-            this.gameSession = gameSession;
-        }
-        
         [HttpGet("[action]")]
         public List<GameSession> GetNewGameSession()
         {
-            gameSession = new List<GameSession>();
-            return gameSession;
+            _gameSession = new List<GameSession> {new GameSession {Board = new Board()}};
+            return _gameSession;
         }
     }
 }

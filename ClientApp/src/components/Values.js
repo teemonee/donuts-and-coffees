@@ -13,6 +13,11 @@ export class Values extends Component {
                 console.log(data);
                 this.setState({ values: data, loading: false });
             });
+        
+        fetch('api/Game/GetNewGameSession')
+            .then(response => response.json())
+            .then(data => console.log(data))
+           
     }
 
     static renderValueTable (values) {
