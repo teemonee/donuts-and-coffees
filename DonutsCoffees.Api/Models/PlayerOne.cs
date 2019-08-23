@@ -1,8 +1,8 @@
 namespace DonutsCoffees.Api.Models
 {
-    public class Player : IPlayer
+    public class PlayerOne : IPlayer
     {
         public Token Token { get; set; }
-        public int SpaceSelection { get; set; }
+        public int[] Moves { get; set; }
     }
 }
