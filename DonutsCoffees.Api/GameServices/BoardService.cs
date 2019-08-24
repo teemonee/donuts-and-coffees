@@ -25,10 +25,10 @@ namespace DonutsCoffees.Api.GameServices
             _board.spaces[_player.RequestedCellPosition-1] = _player.Token;
         }
 
-        public List<object> GetAvailableSpaces()
+        public List<object> GetAvailableMoves()
         {
             var availableList = new List<object>();
-            for (int i = 0; i  < _board.spaces.Count; i ++)
+            for (var i = 0; i  < _board.spaces.Count; i ++)
             {
                 if (_board.spaces[i] is int)
                 {
@@ -36,6 +36,11 @@ namespace DonutsCoffees.Api.GameServices
                 }
             }
             return availableList;
+        }
+
+        public bool IsValidMove()
+        {
+            return _board.spaces[_player.RequestedCellPosition - 1] is int;
         }
     }
 }

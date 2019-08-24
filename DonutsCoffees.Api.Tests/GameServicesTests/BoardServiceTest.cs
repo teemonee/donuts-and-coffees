@@ -34,7 +34,7 @@ using DonutsCoffees.Api.Models;
          }
          
          [Test]
-         public void GetMoves_ReturnsEmptyBoardAtGameStart()
+         public void GetSpaces_ReturnsEmptyBoardAtGameStart()
          {
           
              _boardService = new BoardService(_board, _player);
@@ -45,7 +45,7 @@ using DonutsCoffees.Api.Models;
          }
          
          [Test]
-         public void GetMoves_ReturnsUpdatedBoardAfterOneMove()
+         public void GetSpaces_ReturnsUpdatedBoardAfterOneMove()
          {
           
              _boardService = new BoardService(_board, _player);
@@ -69,13 +69,13 @@ using DonutsCoffees.Api.Models;
          }
 
          [Test]
-         public void GetAvailableSpaces_ReturnsListOfAvailableBoardMoves()
+         public void GetAvailableMoves_ReturnsListOfAvailableBoardMoves()
          {
              UpdatePlayer();
              _boardService = new BoardService(_board, _player);
              _boardService.UpdateBoard();
              
-             var updatedList = _boardService.GetAvailableSpaces();
+             var updatedList = _boardService.GetAvailableMoves();
              
              var expected = new List<object> {1,2,3,4,6,7,8,9};
              
