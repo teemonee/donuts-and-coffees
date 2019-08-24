@@ -11,16 +11,14 @@ using DonutsCoffees.Api.Models;
      public class BoardTServiceTest
      {
          private Board _board;
-         private Player _playerOne;
-         private Player _playerTwo;
+         private Player _player;
          private BoardService _boardService;
 
          [SetUp]
          public void Setup()
          {
              _board = new Board();
-             _playerOne = new Player();
-             _playerTwo = new Player();
+             _player= new Player();
          }
  
          [TearDown]
@@ -28,12 +26,18 @@ using DonutsCoffees.Api.Models;
          {
              _board = null;
          }
+
+         private void UpdatePlayer()
+         {
+             _player.Token = Token.O;
+             _player.RequestedCellPosition = 5;
+         }
          
          [Test]
-         public void GetMoves_ReturnsEmptyBoard()
+         public void GetMoves_ReturnsEmptyBoardAtGameStart()
          {
           
-             _boardService = new BoardService(_board, _playerOne);
+             _boardService = new BoardService(_board, _player);
              var emptyBoard = _boardService.GetSpaces();
  
              var expected = new List<object> {1,2,3,4,5,6,7,8,9};
@@ -41,10 +45,10 @@ using DonutsCoffees.Api.Models;
          }
          
          [Test]
-         public void GetMoves_ReturnsBoardAfterOneMove()
+         public void GetMoves_ReturnsUpdatedBoardAfterOneMove()
          {
           
-             _boardService = new BoardService(_board, _playerOne);
+             _boardService = new BoardService(_board, _player);
              _board.spaces[1] = Token.O;
              var updatedBoard = _boardService.GetSpaces();
 
@@ -55,9 +59,8 @@ using DonutsCoffees.Api.Models;
          [Test]
          public void UpdateBoard_PlacesTokenAtGivenPosition()
          {
-             _playerOne.Token = Token.O;
-             _playerOne.RequestedCellPosition = 5;
-             _boardService = new BoardService(_board, _playerOne);
+             UpdatePlayer();
+             _boardService = new BoardService(_board, _player);
              
              _boardService.UpdateBoard();
              
@@ -68,9 +71,8 @@ using DonutsCoffees.Api.Models;
          [Test]
          public void GetAvailableSpaces_ReturnsListOfAvailableBoardMoves()
          {
-             _playerOne.Token = Token.O;
-             _playerOne.RequestedCellPosition = 5;
-             _boardService = new BoardService(_board, _playerOne);
+             UpdatePlayer();
+             _boardService = new BoardService(_board, _player);
              _boardService.UpdateBoard();
              
              var updatedList = _boardService.GetAvailableSpaces();
@@ -78,6 +80,30 @@ using DonutsCoffees.Api.Models;
              var expected = new List<object> {1,2,3,4,6,7,8,9};
              
              Assert.AreEqual(expected, updatedList);
+         }
+
+         [Test]
+         public void IsValidMove_ReturnsTrueIfSpaceIsAvailable()
+         {
+             UpdatePlayer();
+             _boardService = new BoardService(_board, _player);
+             _boardService.UpdateBoard();
+             
+             _player.RequestedCellPosition = 3;
+
+             Assert.That(_boardService.IsValidMove());
+         }
+         
+         [Test]
+         public void IsValidMove_ReturnsFalseIfSpaceIsUnavailable()
+         {
+             UpdatePlayer();
+             _boardService = new BoardService(_board, _player);
+             _boardService.UpdateBoard();
+             
+             _player.RequestedCellPosition = 5;
+
+             Assert.False(_boardService.IsValidMove());
          }
      }
  }
