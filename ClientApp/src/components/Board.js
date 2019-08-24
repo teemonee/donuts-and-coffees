@@ -9,7 +9,7 @@ export default class Board extends Component {
     renderSquare(){
         return [...Array(9)].map((position, index) => 
             <GridListTile key={index}>
-              <Square value={this.props.moves[position] || ""}/>
+              <Square value={this.props.moves[position] || ""} />
             </GridListTile>
         )  
     }

@@ -9,12 +9,12 @@ namespace DonutsCoffees.Api.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        private List<GameSession> _gameSession;
+        private GameSession _gameSession = new GameSession();
 
         [HttpGet("[action]")]
-        public List<GameSession> GetNewGameSession()
+        public GameSession GetNewGameSession()
         {
-            _gameSession = new List<GameSession> {new GameSession {Board = new Board()}};
+            _gameSession.Board = new Board();
             return _gameSession;
         }
     }

@@ -8,7 +8,8 @@ export class Game extends Component {
   constructor(props){
     super(props);
     this.state = {
-      moves:[]
+      moves:[],
+      greeting:[]
     }
   }
 
@@ -18,19 +19,19 @@ export class Game extends Component {
 
   componentDidMount(){
     this.getNewGame().then(data => {
-      if(data.board.spaces){
-        this.setState({
-          moves: data.board.spaces
-        });
-      }
+      this.setState({
+        moves: data.board.spaces || null,
+      });
     });
   }
   
   render() {
     const { moves } = this.state;
-    
+
     return(
-      <Board moves={moves}/>
+      <div>
+        <Board moves={moves} />
+      </div>
     )
   }
 }

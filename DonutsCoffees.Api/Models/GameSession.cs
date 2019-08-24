@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace DonutsCoffees.Api.Models
 {
     public class GameSession
