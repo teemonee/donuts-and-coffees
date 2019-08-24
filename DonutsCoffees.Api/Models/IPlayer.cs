@@ -4,5 +4,6 @@ namespace DonutsCoffees.Api.Models
     {
         Token Token { get; set; }
         int[] Moves { get; set; }
+        int RequestedCellPosition { get; set; }
     }
 }
