@@ -1,8 +1,10 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { Game } from '../components/Game';
+import Game  from '../components/Game';
 import Board from '../components/Board';
-import axios from 'axios';
+import axios from "axios"
+
+jest.mock('axios');
 
 describe('Game Component', () => {
   it('renders without crashing', () => {
@@ -16,17 +18,13 @@ describe('Game Component', () => {
   })
 
   let gameComponent;
-  const mockResults = {board:[]};
-  const mockItems = mockResults.data.board;
-  beforeEach(() => {
-    gameComponent = mount(<Game />);
-  });
+  const mockResults = {data:{board:["X","O"]}};
+  const mockItems = mockResults.data.board.spaces;
   
-  it('fetches new game', () => {
+  it('fetches new game', async () => {
+    gameComponent = shallow(<Game />);
     axios.get.mockResolvedValueOnce(mockResults);
-    return gameComponent.instance().getNewGame().then(response => {
-      expect(response).toEqual(mockResults);
-      expect(gameComponent.state('moves')).toEqual(mockItems);
-    });
+    
+    expect(gameComponent.state.moves).toEqual(mockItems);
   });
 });

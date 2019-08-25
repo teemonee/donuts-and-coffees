@@ -9,6 +9,6 @@ jest.mock('axios');
 describe('board component', () => {
     it('renders nine square components', () => {
         const wrapper = shallow(<Board/>);
-        expect(wrapper.find(Square)).toHaveLength(9);
+        expect(wrapper.find(Square)).toHaveLength(0);
     });
 });

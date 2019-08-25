@@ -1,3 +1,4 @@
-export default {
-    get: jest.fn().mockResolvedValue({ data: {} })
+module.exports = {
+    get: jest.fn(() => Promise.resolve({ data: {} }))
 };
+

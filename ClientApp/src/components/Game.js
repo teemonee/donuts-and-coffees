@@ -2,27 +2,34 @@ import React, { Component } from 'react';
 import Board from '../components/Board';
 import helpers from "../utils/helpers";
 
-export class Game extends Component {
-  static displayName = Game.name;
+class Game extends Component {
 
   constructor(props){
     super(props);
     this.state = {
       moves:[],
-      greeting:[]
+      error:""
     }
+  }
+
+  componentDidMount(){
+    this.getNewGame().then(data => {
+      this.setState({
+        moves: data.board.spaces,
+      })
+    }).catch((error) => {
+      this.setState({
+        error: "Cannot set board"
+      })
+    })
   }
 
   getNewGame(){
     return helpers.startNewGame();
   }
 
-  componentDidMount(){
-    this.getNewGame().then(data => {
-      this.setState({
-        moves: data.board.spaces || null,
-      });
-    });
+  selectSquare(index){
+    console.log(index);
   }
   
   render() {
@@ -30,8 +37,13 @@ export class Game extends Component {
 
     return(
       <div>
-        <Board moves={moves} />
+        <Board 
+          moves={moves} 
+          selectSquare={(index) => this.selectSquare(index)}
+        />
       </div>
     )
   }
 }
+
+export default Game;

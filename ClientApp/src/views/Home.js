@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Game } from '../components/Game';
+import Game from '../components/Game';
 import Grid from '@material-ui/core/Grid';
 
-export default class Home extends Component {
-  static displayName = Home.name;
+class Home extends Component {
 
   render () {
     return (
@@ -16,3 +15,5 @@ export default class Home extends Component {
     );
   }
 }
+
+export default Home;

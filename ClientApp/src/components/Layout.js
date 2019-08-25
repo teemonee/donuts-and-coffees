@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
-export class Layout extends Component {
-  static displayName = Layout.name;
+class Layout extends Component {
 
   render () {
     return (
@@ -11,3 +10,5 @@ export class Layout extends Component {
     );
   }
 }
+
+export default Layout;
