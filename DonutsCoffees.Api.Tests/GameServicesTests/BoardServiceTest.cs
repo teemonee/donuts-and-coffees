@@ -35,7 +35,7 @@ using DonutsCoffees.Api.Models;
          public void GetSpaces_ReturnsEmptyBoardAtGameStart()
          {
           
-             _boardService = new BoardService(_board, _player);
+             _boardService = new BoardService(_board);
              var emptyBoard = _boardService.GetSpaces();
  
              var expected = new List<object> {1,2,3,4,5,6,7,8,9};
@@ -46,7 +46,7 @@ using DonutsCoffees.Api.Models;
          public void GetSpaces_ReturnsUpdatedBoardAfterOneMove()
          {
              var token = Token.O.ToString();
-             _boardService = new BoardService(_board, _player);
+             _boardService = new BoardService(_board);
              _board.spaces[1] = token;
              var updatedBoard = _boardService.GetSpaces();
 
@@ -59,9 +59,9 @@ using DonutsCoffees.Api.Models;
          {
              var token = Token.O.ToString();
              UpdatePlayer();
-             _boardService = new BoardService(_board, _player);
+             _boardService = new BoardService(_board);
              
-             _boardService.UpdateBoard();
+             _boardService.UpdateBoard(_player.RequestedCellPosition, _player.Token);
              
              var expected = new List<object> {1,2,3,4,token,6,7,8,9};
              Assert.AreEqual(expected, _board.spaces);
@@ -71,8 +71,8 @@ using DonutsCoffees.Api.Models;
          public void GetAvailableMoves_ReturnsListOfAvailableBoardMoves()
          {
              UpdatePlayer();
-             _boardService = new BoardService(_board, _player);
-             _boardService.UpdateBoard();
+             _boardService = new BoardService(_board);
+             _boardService.UpdateBoard(_player.RequestedCellPosition, _player.Token);
              
              var updatedList = _boardService.GetAvailableMoves();
              
@@ -85,24 +85,24 @@ using DonutsCoffees.Api.Models;
          public void IsValidMove_ReturnsTrueIfSpaceIsAvailable()
          {
              UpdatePlayer();
-             _boardService = new BoardService(_board, _player);
-             _boardService.UpdateBoard();
+             _boardService = new BoardService(_board);
+             _boardService.UpdateBoard(_player.RequestedCellPosition, _player.Token);
              
              _player.RequestedCellPosition = 3;
 
-             Assert.That(_boardService.IsValidMove());
+             Assert.That(_boardService.IsValidMove(_player.RequestedCellPosition));
          }
          
          [Test]
          public void IsValidMove_ReturnsFalseIfSpaceIsUnavailable()
          {
              UpdatePlayer();
-             _boardService = new BoardService(_board, _player);
-             _boardService.UpdateBoard();
+             _boardService = new BoardService(_board);
+             _boardService.UpdateBoard(_player.RequestedCellPosition, _player.Token);
              
              _player.RequestedCellPosition = 5;
 
-             Assert.False(_boardService.IsValidMove());
+             Assert.False(_boardService.IsValidMove(_player.RequestedCellPosition));
          }
      }
  }

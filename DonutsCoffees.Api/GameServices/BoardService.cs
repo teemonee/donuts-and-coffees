@@ -7,12 +7,10 @@ namespace DonutsCoffees.Api.GameServices
     public class BoardService
     {
         private static Board _board;
-        private static Player _player;
 
-        public BoardService(Board board, Player player)
+        public BoardService(Board board)
         {
             _board = board;
-            _player = player;
         }
 
         public List<object> GetSpaces()
@@ -20,9 +18,9 @@ namespace DonutsCoffees.Api.GameServices
             return _board.spaces;
         }
 
-        public void UpdateBoard()
+        public void UpdateBoard(int requestedCellPosition, string token)
         {
-            _board.spaces[_player.RequestedCellPosition-1] = _player.Token;
+            _board.spaces[requestedCellPosition-1] = token;
         }
 
         public List<object> GetAvailableMoves()
@@ -38,9 +36,9 @@ namespace DonutsCoffees.Api.GameServices
             return availableList;
         }
 
-        public bool IsValidMove()
+        public bool IsValidMove(int requestedCellPosition)
         {
-            return _board.spaces[_player.RequestedCellPosition - 1] is int;
+            return _board.spaces[requestedCellPosition - 1] is int;
         }
     }
 }

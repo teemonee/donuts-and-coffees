@@ -5,7 +5,7 @@ namespace DonutsCoffees.Api.GameServices
     public interface IGameService
     {
         GameSession SetupNewGame();
-        void UpdateGameSession(GameSession gameSession);
-        void CheckIfGameOver(GameSession gameSession);
+        void UpdateGameSession();
+        void CheckIfGameOver();
     }
 }

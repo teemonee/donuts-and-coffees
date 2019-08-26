@@ -6,23 +6,26 @@ namespace DonutsCoffees.Api.GameServices
     public class GameService : IGameService
     {
         private static GameSession _gameSession;
-        
+        private static BoardService _boardService;
+        private static IPlayer _player;
         public GameService(GameSession gameSession)
         {
             _gameSession = gameSession;
+            _boardService = new BoardService(_gameSession.Board);
+            _player = gameSession.PlayerOne;
         }
         
         public GameSession SetupNewGame()
         {
-            _gameSession.PlayerOne.Token = Token.X.ToString();
+            _player.Token = Token.X.ToString();
             return _gameSession;
         }
-        public void UpdateGameSession(GameSession gameSession)
+        public void UpdateGameSession()
         {
-            throw new NotImplementedException();
+            _boardService.UpdateBoard(_player.RequestedCellPosition, _player.Token);
         }
         
-        public void CheckIfGameOver(GameSession gameSession)
+        public void CheckIfGameOver()
         {
             throw new NotImplementedException();
         }
