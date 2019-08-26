@@ -1,9 +1,6 @@
-using System.Net.Http;
 using DonutsCoffees.Api.Controllers;
 using DonutsCoffees.Api.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Rewrite.Internal.UrlActions;
 using NUnit.Framework;
 
 namespace DonutsCoffees.Api.Tests.ControllersTests

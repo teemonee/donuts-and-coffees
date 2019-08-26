@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using DonutsCoffees.Api.GameServices;
 using DonutsCoffees.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +26,8 @@ namespace DonutsCoffees.Api.Controllers
             _playerOne.Token = Token.O.ToString();
 
             _board.spaces[incomingItem.RequestedCellPosition - 1] = _playerOne.Token;
+
+            _playerOne.Token = Token.X.ToString();
 
             return RedirectToAction("GetGameSession");
         }
