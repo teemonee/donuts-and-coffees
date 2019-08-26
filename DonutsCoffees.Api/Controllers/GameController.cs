@@ -27,12 +27,7 @@ namespace DonutsCoffees.Api.Controllers
             _gameSession.PlayerOne = _playerOne;
             _playerOne.RequestedCellPosition = incomingItem.RequestedCellPosition;
 
-            return Ok(new
-            {
-                success = true,
-                returncode = "200",
-                game = _playerOne.RequestedCellPosition
-            });
+            return RedirectToAction("GetNewGameSession");
         }
     }
 }
