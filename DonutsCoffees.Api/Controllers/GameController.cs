@@ -7,14 +7,13 @@ namespace DonutsCoffees.Api.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        private static GameSession _gameSession = new GameSession();
         private static IPlayer _playerOne = new Player();
         private static Board _board = new Board();
+        private static GameSession _gameSession = new GameSession() {Board = _board};
 
         [HttpGet("[action]")]
         public GameSession GetGameSession()
         {
-            _gameSession.Board = _board;
             return _gameSession;
         }
 
