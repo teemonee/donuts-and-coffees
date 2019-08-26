@@ -12,7 +12,7 @@ describe('Home Component', () => {
         const wrapper = shallow(<Home />);
         
         expect(wrapper.find(Game)).toHaveLength(1);
-    })
+    });
 });
 
 

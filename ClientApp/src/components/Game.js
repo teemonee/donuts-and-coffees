@@ -13,23 +13,30 @@ class Game extends Component {
   }
 
   componentDidMount(){
-    this.getNewGame().then(data => {
+    helpers.startNewGame().then(data => {
       this.setState({
         moves: data.board.spaces,
       })
     }).catch((error) => {
       this.setState({
-        error: "Cannot set board"
+        error: "Uh oh, something went wrong..."
       })
-    })
+    });
   }
-
-  getNewGame(){
-    return helpers.startNewGame();
+  
+  selectSquare(cellPosition){
+    console.log(cellPosition);
+    return this.postNewMark(cellPosition);
   }
+  
 
-  selectSquare(index){
-    console.log(index);
+  postNewMark(requestedMove) {
+    helpers.makeBoardMarkRequest(requestedMove)
+      .then((response) => {
+        console.log(response);
+      }).catch(error => {
+        console.log(error);
+    });
   }
   
   render() {
@@ -39,7 +46,7 @@ class Game extends Component {
       <div>
         <Board 
           moves={moves} 
-          selectSquare={(index) => this.selectSquare(index)}
+          selectSquare={(cellPosition) => this.selectSquare(cellPosition)}
         />
       </div>
     )
