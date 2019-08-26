@@ -9,7 +9,7 @@ namespace DonutsCoffees.Api.Tests.GameServicesTests
     [TestFixture]
     public class GameServiceTest
     {
-        private IPlayer _player;
+        private Player _player;
         private Board _board;
         private GameSession _testGameSession;
         private GameService _testGameService;
@@ -18,7 +18,7 @@ namespace DonutsCoffees.Api.Tests.GameServicesTests
         [SetUp]
         public void Setup()
         {
-            _player = new Player();
+            _player = new Player(){Token = Token.X.ToString()};
             _board = new Board();
             _testGameSession = new GameSession()
             {
@@ -53,7 +53,7 @@ namespace DonutsCoffees.Api.Tests.GameServicesTests
         {
             _testGameService.SetupNewGame();
             _player.RequestedCellPosition = 2;
-            _testGameService.UpdateGameSession();
+            _testGameService.UpdateGameSession(_player);
             
             var expected = new List<object> {1, "X", 3, 4, 5, 6, 7, 8, 9};
 

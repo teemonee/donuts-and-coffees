@@ -7,12 +7,14 @@ namespace DonutsCoffees.Api.GameServices
     {
         private static GameSession _gameSession;
         private static BoardService _boardService;
-        private static IPlayer _player;
+        private static Player _player;
+        
         public GameService(GameSession gameSession)
         {
             _gameSession = gameSession;
+            _gameSession.Board = new Board();
             _boardService = new BoardService(_gameSession.Board);
-            _player = gameSession.PlayerOne;
+            _player = new Player();
         }
         
         public GameSession SetupNewGame()
@@ -20,9 +22,10 @@ namespace DonutsCoffees.Api.GameServices
             _player.Token = Token.X.ToString();
             return _gameSession;
         }
-        public void UpdateGameSession()
+        
+        public void UpdateGameSession(Player incomingItem)
         {
-            _boardService.UpdateBoard(_player.RequestedCellPosition, _player.Token);
+            _boardService.UpdateBoard(incomingItem.RequestedCellPosition, _player.Token);
         }
         
         public void CheckIfGameOver()

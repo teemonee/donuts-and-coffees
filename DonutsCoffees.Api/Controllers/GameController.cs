@@ -1,3 +1,5 @@
+using System;
+using DonutsCoffees.Api.GameServices;
 using DonutsCoffees.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,10 +9,15 @@ namespace DonutsCoffees.Api.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        private static IPlayer _playerOne = new Player();
-        private static Board _board = new Board();
-        private static GameSession _gameSession = new GameSession() {Board = _board};
+        private static GameSession _gameSession = new GameSession();
+        private static GameService _gameService = new GameService(_gameSession);
 
+        [HttpGet("[action]")]
+        public GameSession GetNewGameSession()
+        {
+            return _gameService.SetupNewGame();
+        }
+        
         [HttpGet("[action]")]
         public GameSession GetGameSession()
         {
@@ -20,13 +27,7 @@ namespace DonutsCoffees.Api.Controllers
         [HttpPost("[action]")]
         public IActionResult CreateMove([FromBody]Player incomingItem)
         {
-            _gameSession.PlayerOne = _playerOne;
-            _playerOne.RequestedCellPosition = incomingItem.RequestedCellPosition;
-            _playerOne.Token = Token.O.ToString();
-
-            _board.spaces[incomingItem.RequestedCellPosition - 1] = _playerOne.Token;
-
-            _playerOne.Token = Token.X.ToString();
+            _gameService.UpdateGameSession(incomingItem);
 
             return RedirectToAction("GetGameSession");
         }
