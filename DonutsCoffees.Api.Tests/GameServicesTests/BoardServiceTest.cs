@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using DonutsCoffees.Api.GameServices;
 using DonutsCoffees.Api.Models;
  using NUnit.Framework;
@@ -29,7 +27,7 @@ using DonutsCoffees.Api.Models;
 
          private void UpdatePlayer()
          {
-             _player.Token = Token.O;
+             _player.Token = Token.O.ToString();
              _player.RequestedCellPosition = 5;
          }
          
@@ -49,7 +47,7 @@ using DonutsCoffees.Api.Models;
          {
           
              _boardService = new BoardService(_board, _player);
-             _board.spaces[1] = Token.O;
+             _board.spaces[1] = Token.O.ToString();
              var updatedBoard = _boardService.GetSpaces();
 
              var expected = new List<object> {1,Token.O,3,4,5,6,7,8,9};

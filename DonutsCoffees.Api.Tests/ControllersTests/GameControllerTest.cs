@@ -11,7 +11,7 @@ namespace DonutsCoffees.Api.Tests.ControllersTests
         {
             var controller = new GameController();
 
-            var result = controller.GetNewGameSession();
+            var result = controller.GetGameSession();
            
             Assert.IsNotNull(result);
         }
