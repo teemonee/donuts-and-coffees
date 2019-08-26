@@ -26,6 +26,7 @@ namespace DonutsCoffees.Api.Controllers
         {
             _gameSession.PlayerOne = _playerOne;
             _playerOne.RequestedCellPosition = incomingItem.RequestedCellPosition;
+            _board.spaces[incomingItem.RequestedCellPosition-1] = "X";
 
             return RedirectToAction("GetNewGameSession");
         }
