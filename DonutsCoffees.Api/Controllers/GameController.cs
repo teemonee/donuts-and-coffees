@@ -15,7 +15,7 @@ namespace DonutsCoffees.Api.Controllers
         private static Board _board = new Board();
 
         [HttpGet("[action]")]
-        public GameSession GetNewGameSession()
+        public GameSession GetGameSession()
         {
             _gameSession.Board = _board;
             return _gameSession;
@@ -28,7 +28,7 @@ namespace DonutsCoffees.Api.Controllers
             _playerOne.RequestedCellPosition = incomingItem.RequestedCellPosition;
             _board.spaces[incomingItem.RequestedCellPosition-1] = "X";
 
-            return RedirectToAction("GetNewGameSession");
+            return RedirectToAction("GetGameSession");
         }
     }
 }

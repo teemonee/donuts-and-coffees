@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import Board from '../components/Board';
+import React, { Component } from "react";
+import Board from "../components/Board";
 import helpers from "../utils/helpers";
+import Constants from "../utils/constants";
 
 class Game extends Component {
 
@@ -19,7 +20,7 @@ class Game extends Component {
       })
     }).catch((error) => {
       this.setState({
-        error: "Uh oh, something went wrong..."
+        error: Constants.LOADING_ERROR
       })
     });
   }
@@ -33,9 +34,13 @@ class Game extends Component {
   postNewMark(requestedMove) {
     helpers.makeBoardMarkRequest(requestedMove)
       .then((response) => {
-        console.log(response);
+        this.setState({
+          moves: response.board.spaces
+        })
       }).catch(error => {
-        console.log(error);
+        this.setState({
+          error: Constants.LOADING_ERROR
+        })
     });
   }
   
