@@ -11,5 +11,10 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.14.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
   </ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\DonutsCoffees.Api\DonutsCoffees.Api.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GameServicesTests\" />
+  </ItemGroup>
 </Project>

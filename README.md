@@ -19,7 +19,7 @@ $ git clone https://github.com/teemonee/donuts-and-coffees.git
 2 - Navigate to the cloned project's root folder and run the following command:
  
 ```
-$ dotnet run
+$ dotnet run --project DonutsCoffees.Api 
 ```
 
 Note: To stop the app, run the following command:
