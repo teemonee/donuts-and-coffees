@@ -45,24 +45,25 @@ using DonutsCoffees.Api.Models;
          [Test]
          public void GetSpaces_ReturnsUpdatedBoardAfterOneMove()
          {
-          
+             var token = Token.O.ToString();
              _boardService = new BoardService(_board, _player);
-             _board.spaces[1] = Token.O.ToString();
+             _board.spaces[1] = token;
              var updatedBoard = _boardService.GetSpaces();
 
-             var expected = new List<object> {1,Token.O,3,4,5,6,7,8,9};
+             var expected = new List<object> {1,token,3,4,5,6,7,8,9};
              Assert.AreEqual(expected, updatedBoard);
          }
          
          [Test]
          public void UpdateBoard_PlacesTokenAtGivenPosition()
          {
+             var token = Token.O.ToString();
              UpdatePlayer();
              _boardService = new BoardService(_board, _player);
              
              _boardService.UpdateBoard();
              
-             var expected = new List<object> {1,2,3,4,Token.O,6,7,8,9};
+             var expected = new List<object> {1,2,3,4,token,6,7,8,9};
              Assert.AreEqual(expected, _board.spaces);
          }
 

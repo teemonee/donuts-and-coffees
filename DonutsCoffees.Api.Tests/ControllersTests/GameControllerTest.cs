@@ -1,4 +1,9 @@
+using System.Net.Http;
 using DonutsCoffees.Api.Controllers;
+using DonutsCoffees.Api.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite.Internal.UrlActions;
 using NUnit.Framework;
 
 namespace DonutsCoffees.Api.Tests.ControllersTests
@@ -6,14 +11,36 @@ namespace DonutsCoffees.Api.Tests.ControllersTests
     [TestFixture]
     public class GameControllerTest
     {
-        [Test]
-        public void GetNewGameSession_ItSendsNewGameSessionToClient()
-        {
-            var controller = new GameController();
+        private GameController _controller;
+        private Player _player;
 
-            var result = controller.GetGameSession();
-           
+        [SetUp]
+        public void Setup()
+        {
+            _controller = new GameController();
+            _player= new Player();
+        }
+        
+        [Test]
+        public void GetGameSession_ItSendsNewGameSessionToClient()
+        {
+            var result = _controller.GetGameSession();
+
+            Assert.IsInstanceOf<GameSession>(result);
             Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void CreateMove_RedirectsToGetGameSessionAction()
+        {
+            _player.Token = Token.O.ToString();
+            _player.RequestedCellPosition = 5;
+            
+            var result = _controller.CreateMove(_player);
+            var actionResult = result as RedirectToActionResult;
+                
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual("GetGameSession", actionResult.ActionName);
         }
     }
 }
