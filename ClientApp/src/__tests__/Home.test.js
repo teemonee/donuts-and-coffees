@@ -1,7 +1,7 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import { Home } from '../views/Home';
-import Board from '../components/Board'
+import { shallow } from 'enzyme';
+import Home from '../views/Home';
+import Game from '../components/Game'
 
 describe('Home Component', () => {
     it('renders without crashing', () => {
@@ -11,8 +11,8 @@ describe('Home Component', () => {
     it('renders board component', () => {
         const wrapper = shallow(<Home />);
         
-        expect(wrapper.find(Board)).toHaveLength(1);
-    })
+        expect(wrapper.find(Game)).toHaveLength(1);
+    });
 });
 
 

@@ -1,6 +1,15 @@
 const constants = {
-    Game_Fetch_Error: "Error fetching new game!",
-    NEW_GAME_URL:'/api/Game/GetNewGameSession'
+    GAME_FETCH_ERROR: "Error fetching new game!",
+    BOARD_MARK_REQUEST_ERROR:"Error posting to server!",
+    LOADING_ERROR:  "Uh oh, something went wrong...",
+    GAME_SESSION_URL:"/api/Game/GetGameSession",
+    CREATE_MOVE_URL:"/api/Game/CreateMove",
+    AXIOS_JSON_HEADERS: { 
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        }
+    }
 };
 
 export default constants;

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
-using System.Data.Common;
+using System.Threading.Tasks;
+using DonutsCoffees.Api.GameServices;
 using DonutsCoffees.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,13 +11,27 @@ namespace DonutsCoffees.Api.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        private List<GameSession> _gameSession;
+        private static GameSession _gameSession = new GameSession();
+        private static IPlayer _playerOne = new Player();
+        private static Board _board = new Board();
 
         [HttpGet("[action]")]
-        public List<GameSession> GetNewGameSession()
+        public GameSession GetGameSession()
         {
-            _gameSession = new List<GameSession> {new GameSession {Board = new Board()}};
+            _gameSession.Board = _board;
             return _gameSession;
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult CreateMove([FromBody]Player incomingItem)
+        {
+            _gameSession.PlayerOne = _playerOne;
+            _playerOne.RequestedCellPosition = incomingItem.RequestedCellPosition;
+            _playerOne.Token = Token.O.ToString();
+
+            _board.spaces[incomingItem.RequestedCellPosition - 1] = _playerOne.Token;
+
+            return RedirectToAction("GetGameSession");
         }
     }
 }

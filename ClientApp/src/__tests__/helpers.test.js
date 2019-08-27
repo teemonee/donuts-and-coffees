@@ -13,4 +13,11 @@ describe('api calls', () => {
         });
     });
     
+    it('makes post request to update game session items', () => {
+        axios.post.mockResolvedValueOnce({data: {requestedCellPosition:5}});
+        
+        return helpers.makeBoardMarkRequest(5).then(response => {
+            expect(response).toEqual({requestedCellPosition:5});
+        })
+    });
 });
