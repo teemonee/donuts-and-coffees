@@ -63,16 +63,14 @@ namespace DonutsCoffees.Api.Tests.GameServicesTests
         }
 
         [Test]
-        public void UpdateGameSession_ReturnsErrorMessageForInvalidMove()
+        public void MoveValidationSuccess_ReturnsFalseForInvalidMove()
         {    
             _testGameService.SetupNewGame();
             _player.RequestedCellPosition = 2;
             _testGameService.UpdateGameSession(_player);
-            _testGameService.UpdateGameSession(_player);
+            var validation = _testGameService.MoveValidationSuccess(_player);
             
-            var expected = GameStatus.PositionSelectionError.ToString();
-            
-            Assert.AreEqual(expected, _testGameSession.Status);
+            Assert.False(validation);
         }
     }
 }

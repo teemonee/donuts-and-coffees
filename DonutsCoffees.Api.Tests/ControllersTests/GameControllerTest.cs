@@ -4,6 +4,7 @@ using DonutsCoffees.Api.Controllers;
 using DonutsCoffees.Api.GameServices;
 using DonutsCoffees.Api.Models;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using NUnit.Framework;
 
 namespace DonutsCoffees.Api.Tests.ControllersTests
@@ -35,6 +36,11 @@ namespace DonutsCoffees.Api.Tests.ControllersTests
             Assert.AreEqual(9, result.Board.spaces.Count);
             Assert.False(result.Board.spaces.Contains(typeof(string)));
         }
+
+        [Test]
+        public void GetNewGameSession_ReturnsNewGameSessionModel()
+        {
+        }
         
         [Test]
         public void GetGameSession_ItGetsCurrentGameSession()
@@ -53,24 +59,11 @@ namespace DonutsCoffees.Api.Tests.ControllersTests
         [Test]
         public void GetGameSession_ItReturnsCurrentGameSessionToClient()
         {
-            _controller.GetGameSession();
-            _player.RequestedCellPosition = 5;
-            _controller.CreateMove(_player);
-            var result = _controller.GetGameSession();
-            
         }
 
         [Test]
-        public void CreateMove_RedirectsToGetGameSessionAction()
+        public void CreateMove_RedirectsToGetGameSessionActionWithValidMove()
         {
-            _player.Token = Token.O.ToString();
-            _player.RequestedCellPosition = 5;
-            
-            var result = _controller.CreateMove(_player);
-            var actionResult = result as RedirectToActionResult;
-                
-            Assert.IsNotNull(actionResult);
-            Assert.AreEqual("GetGameSession", actionResult.ActionName);
         }
     }
 }
