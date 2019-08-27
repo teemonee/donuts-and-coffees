@@ -51,20 +51,12 @@ namespace DonutsCoffees.Api.Tests.ControllersTests
         }
         
         [Test]
-        public void GetGameSession_ItReturnsCurrentGameSessionToClient()
-        {
-            _controller.GetGameSession();
-            _player.RequestedCellPosition = 5;
-            _controller.CreateMove(_player);
-            var result = _controller.GetGameSession();
-            
-        }
-
-        [Test]
         public void CreateMove_RedirectsToGetGameSessionAction()
         {
-            _player.Token = Token.O.ToString();
+            _controller.GetNewGameSession();
+           
             _player.RequestedCellPosition = 5;
+            _controller.CreateMove(_player);
             
             var result = _controller.CreateMove(_player);
             var actionResult = result as RedirectToActionResult;
