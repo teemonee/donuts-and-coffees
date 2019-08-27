@@ -38,11 +38,6 @@ namespace DonutsCoffees.Api.Tests.ControllersTests
         }
 
         [Test]
-        public void GetNewGameSession_ReturnsNewGameSessionModel()
-        {
-        }
-        
-        [Test]
         public void GetGameSession_ItGetsCurrentGameSession()
         {
             _controller.GetNewGameSession();
@@ -56,14 +51,18 @@ namespace DonutsCoffees.Api.Tests.ControllersTests
             Assert.AreEqual(9, result.Board.spaces.Count);
         }
         
-        [Test]
-        public void GetGameSession_ItReturnsCurrentGameSessionToClient()
+        public void CreateMove_RedirectsToGetGameSessionAction()
         {
-        }
-
-        [Test]
-        public void CreateMove_RedirectsToGetGameSessionActionWithValidMove()
-        {
+            _controller.GetNewGameSession();
+           
+            _player.RequestedCellPosition = 5;
+            _controller.CreateMove(_player);
+            
+            var result = _controller.CreateMove(_player);
+            var actionResult = result as RedirectToActionResult;
+                
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual("GetGameSession", actionResult.ActionName);
         }
     }
 }

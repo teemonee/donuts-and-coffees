@@ -34,9 +34,8 @@ using DonutsCoffees.Api.Models;
          [Test]
          public void GetSpaces_ReturnsEmptyBoardAtGameStart()
          {
-          
              _boardService = new BoardService(_board);
-             var emptyBoard = _boardService.GetSpaces();
+            var emptyBoard = _boardService.GetSpaces();
  
              var expected = new List<object> {1,2,3,4,5,6,7,8,9};
              Assert.AreEqual(expected, emptyBoard);

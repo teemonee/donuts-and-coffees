@@ -16,29 +16,26 @@ namespace DonutsCoffees.Api.GameServices
             _gameSession = gameSession;
             _gameSession.Board = new Board();
             _boardService = new BoardService(_gameSession.Board);
-            _playerOne = _gameSession.PlayerOne = new Player();
-            _playerTwo = _gameSession.PlayerTwo = new Player();
+            _playerOne = _gameSession.PlayerOne = new Player() {Token = Token.X.ToString()};
+            _playerTwo = _gameSession.PlayerTwo = new Player() { Token = Token.O.ToString()};
         }
         
         public GameSession SetupNewGame()
         {
-            _playerOne.Token = Token.X.ToString();
-            _playerTwo.Token = Token.O.ToString();
             _currentPlayer = _playerOne;
             return _gameSession;
         }
 
         public Player SwitchPlayer()
         {
-            var currentPlayer = _currentPlayer == _playerOne ? _playerTwo : _playerOne;
-            return currentPlayer;
+            return _currentPlayer == _playerOne ? _playerTwo : _playerOne;
         }
 
         public bool MoveValidationSuccess(Player incomingItem)
         {
             return _boardService.IsValidMove(incomingItem.RequestedCellPosition);
         }
-        
+
         public void UpdateGameSession(Player incomingItem)
         {
             _boardService.UpdateBoard(incomingItem.RequestedCellPosition, _currentPlayer.Token);
