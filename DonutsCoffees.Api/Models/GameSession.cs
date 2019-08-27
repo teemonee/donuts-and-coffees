@@ -5,6 +5,7 @@ namespace DonutsCoffees.Api.Models
     public class GameSession
     {
         public Board Board { get; set; }
-        public IPlayer PlayerOne { get; set; }
+        public Player PlayerOne { get; set; }
+        public Player PlayerTwo { get; set; }
     }
 }
