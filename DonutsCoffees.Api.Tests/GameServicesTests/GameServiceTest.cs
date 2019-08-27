@@ -49,15 +49,30 @@ namespace DonutsCoffees.Api.Tests.GameServicesTests
         }
 
         [Test]
-        public void UpdateGameSession_ReturnsUpdatedBoard()
+        public void UpdateGameSession_ReturnsUpdatedBoardWhenPassedValidMove()
         {
             _testGameService.SetupNewGame();
             _player.RequestedCellPosition = 2;
             _testGameService.UpdateGameSession(_player);
             
             var expected = new List<object> {1, "X", 3, 4, 5, 6, 7, 8, 9};
+            var expectedStatus = GameStatus.InProgress.ToString();
 
             Assert.AreEqual(expected, _testGameSession.Board.spaces);
+            Assert.AreEqual(expectedStatus, _testGameSession.Status);
+        }
+
+        [Test]
+        public void UpdateGameSession_ReturnsErrorMessageForInvalidMove()
+        {    
+            _testGameService.SetupNewGame();
+            _player.RequestedCellPosition = 2;
+            _testGameService.UpdateGameSession(_player);
+            _testGameService.UpdateGameSession(_player);
+            
+            var expected = GameStatus.PositionSelectionError.ToString();
+            
+            Assert.AreEqual(expected, _testGameSession.Status);
         }
     }
 }

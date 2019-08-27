@@ -37,8 +37,14 @@ namespace DonutsCoffees.Api.GameServices
         
         public void UpdateGameSession(Player incomingItem)
         {
+            if (!_boardService.IsValidMove(incomingItem.RequestedCellPosition))
+            {
+                _gameSession.Status = GameStatus.PositionSelectionError.ToString();
+            }
+            
             _boardService.UpdateBoard(incomingItem.RequestedCellPosition, _currentPlayer.Token);
             _currentPlayer = CurrentPlayer();
+            _gameSession.Status = GameStatus.InProgress.ToString();
         }
         
         public void CheckIfGameOver()
