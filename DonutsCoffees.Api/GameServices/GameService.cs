@@ -7,25 +7,38 @@ namespace DonutsCoffees.Api.GameServices
     {
         private static GameSession _gameSession;
         private static BoardService _boardService;
-        private static Player _player;
-        
+        private static Player _playerOne;
+        private static Player _playerTwo;
+        private static Player _currentPlayer;
+
         public GameService(GameSession gameSession)
         {
             _gameSession = gameSession;
             _gameSession.Board = new Board();
             _boardService = new BoardService(_gameSession.Board);
-            _player = new Player();
+            _playerOne = _gameSession.PlayerOne = new Player();
+            _playerTwo = _gameSession.PlayerTwo = new Player();
         }
         
         public GameSession SetupNewGame()
         {
-            _player.Token = Token.X.ToString();
+            _playerOne.Token = Token.X.ToString();
+            _playerTwo.Token = Token.O.ToString();
+            _currentPlayer = _playerOne;
             return _gameSession;
         }
+
+        public Player CurrentPlayer()
+        {
+            var currentPlayer = _currentPlayer == _playerOne ? _playerTwo : _playerOne;
+            return currentPlayer;
+        }
+        
         
         public void UpdateGameSession(Player incomingItem)
         {
-            _boardService.UpdateBoard(incomingItem.RequestedCellPosition, _player.Token);
+            _boardService.UpdateBoard(incomingItem.RequestedCellPosition, _currentPlayer.Token);
+            _currentPlayer = CurrentPlayer();
         }
         
         public void CheckIfGameOver()
