@@ -9,6 +9,7 @@ class Game extends Component {
     super(props);
     this.state = {
       moves:[],
+      disabledButtons:[],
       error:""
     }
   }
@@ -17,6 +18,7 @@ class Game extends Component {
     helpers.startNewGame().then(data => {
       this.setState({
         moves: data.board.spaces,
+        disabledButtons: new Array(data["board"].spaces.length).fill(false)
       })
     }).catch((error) => {
       this.setState({
@@ -26,16 +28,19 @@ class Game extends Component {
   }
   
   selectSquare(cellPosition){
-    console.log(cellPosition);
     return this.postNewMark(cellPosition);
   }
   
 
   postNewMark(requestedMove) {
+    const newDisabledButtons = this.state["disabledButtons"];
+    newDisabledButtons[requestedMove]=true;
+    
     helpers.makeBoardMarkRequest(requestedMove)
       .then((response) => {
         this.setState({
-          moves: response.board.spaces
+            moves: response["board"].spaces,
+            disabledButtons: Object.assign(this.state["disabledButtons"], newDisabledButtons)
         })
       }).catch(error => {
         this.setState({
@@ -45,11 +50,12 @@ class Game extends Component {
   }
   
   render() {
-    const { moves } = this.state;
+    const { moves, disabledButtons } = this.state;
 
     return(
       <div>
-        <Board 
+        <Board
+          disabledButtons={disabledButtons}
           moves={moves} 
           selectSquare={(cellPosition) => this.selectSquare(cellPosition)}
         />
