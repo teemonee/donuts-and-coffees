@@ -1,7 +1,10 @@
 using System;
+using System.Net;
+using System.Net.Http;
 using DonutsCoffees.Api.GameServices;
 using DonutsCoffees.Api.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite.Internal.UrlActions;
 
 namespace DonutsCoffees.Api.Controllers
 {
@@ -17,7 +20,7 @@ namespace DonutsCoffees.Api.Controllers
         {
             return _gameService.SetupNewGame();
         }
-        
+
         [HttpGet("[action]")]
         public GameSession GetGameSession()
         {
@@ -27,8 +30,16 @@ namespace DonutsCoffees.Api.Controllers
         [HttpPost("[action]")]
         public IActionResult CreateMove([FromBody]Player incomingItem)
         {
-            _gameService.UpdateGameSession(incomingItem);
+            if (!_gameService.MoveValidationSuccess(incomingItem))
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent(GameStatus.PositionSelectionError.ToString())
+                };
+                return RedirectToAction("GetGameSession", "Game", response);
+            }
 
+            _gameService.UpdateGameSession(incomingItem);
             return RedirectToAction("GetGameSession");
         }
     }

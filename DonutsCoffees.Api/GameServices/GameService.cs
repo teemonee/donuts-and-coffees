@@ -26,15 +26,21 @@ namespace DonutsCoffees.Api.GameServices
             return _gameSession;
         }
 
-        public Player CurrentPlayer()
+        public Player SwitchPlayer()
         {
             return _currentPlayer == _playerOne ? _playerTwo : _playerOne;
         }
-        
+
+        public bool MoveValidationSuccess(Player incomingItem)
+        {
+            return _boardService.IsValidMove(incomingItem.RequestedCellPosition);
+        }
+
         public void UpdateGameSession(Player incomingItem)
         {
             _boardService.UpdateBoard(incomingItem.RequestedCellPosition, _currentPlayer.Token);
-            _currentPlayer = CurrentPlayer();
+            _currentPlayer = SwitchPlayer();
+            _gameSession.Status = GameStatus.InProgress.ToString();
         }
         
         public void CheckIfGameOver()

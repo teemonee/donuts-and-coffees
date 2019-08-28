@@ -7,15 +7,17 @@ import GridListTile from '@material-ui/core/GridListTile';
 class Board extends Component {
   
   render(){
-    let moves = this.props.moves || [];
-    let selectSquare = this.props.selectSquare || null;
+    let moves = this.props["moves"] || [];
+    let selectSquare = this.props["selectSquare"];
+    let disabledButtons = this.props["disabledButtons"];
     
     let renderSquare = 
       moves.map((move, key) => (
         <GridListTile key={key}>
           <Square
-            value={move || ""}
+            value={move}
             onClick={() => selectSquare(move)}
+            disabled={disabledButtons[move]}
           />
         </GridListTile>
       ))

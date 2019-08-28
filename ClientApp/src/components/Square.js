@@ -7,9 +7,11 @@ const Square = (props) => (
         variant="contained"
         color="primary"
         onClick={props.onClick}
+        disabled={props.disabled}
     >
         {props.value}
     </Button>
 );
+
 
 export default Square;
