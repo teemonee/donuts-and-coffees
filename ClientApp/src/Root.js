@@ -9,7 +9,7 @@ class Root extends Component {
     return (
       <BrowserRouter>
         <Layout>
-          <Route exact path='/' component={Home} />
+          <Route exact path='*' component={Home} />
         </Layout>
       </BrowserRouter>
     );
